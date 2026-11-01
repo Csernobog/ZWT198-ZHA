@@ -2,7 +2,7 @@
 
 Custom ZHA thermostat support and weekly schedule editor for Tuya **ZWT198** (manufacturer `_TZE284_zjhoqbrd`, Zigbee model `TS0601`).
 
-> **v0.4 development scaffold.** The thermostat, RAW DP109 program write, Pyscript helpers and expandable Lovelace schedule graph were tested locally on 2026-11-01. The exact, verified local quirk/Pyscript/dashboard source still needs to be imported. **This repository is not yet a complete installable release.**
+> **v0.4 tested local snapshot.** The quirk, Pyscript and Lovelace YAML are now included from the user's working installation. The Pyscript IEEE address is replaced with a placeholder; edit it before deployment. This remains a device-specific development release, not yet a fully generalized integration.
 
 ## Verified features
 
@@ -16,11 +16,11 @@ Custom ZHA thermostat support and weekly schedule editor for Tuya **ZWT198** (ma
 ## Repository structure
 
 ```text
-custom_zha_quirks/      # quirk destination (verified file pending)
-pyscript/               # editor services (verified file pending)
+custom_zha_quirks/      # tested quirk source
+pyscript/               # tested editor services
 packages/
   ZWT198_helpers.yaml   # HA helpers
-lovelace/               # tested dashboard YAML pending
+lovelace/               # tested expandable dashboard YAML
 docs/
   installation.md       # setup and validation
   protocol.md           # DP map and 32-byte DP109 format
