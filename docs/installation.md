@@ -1,6 +1,6 @@
 # Installation / telepítés
 
-> **Not a complete installation package yet.** Before following these instructions, import the already-tested local `tuya_ts0601_zjhoqbrd.py`, `zwt198_schedule.py` and Lovelace card YAML. Do not substitute reconstructed code for the known-good versions.
+> **Verified v0.4 files are included.** Set your own Zigbee device IEEE in `pyscript/zwt198_schedule.py` before deployment. The dashboard climate entity ID may also need adapting. Make a backup before replacing local working files.
 
 ## Tested environment (2026-11-01)
 
@@ -15,10 +15,10 @@
 
 | Repository | Home Assistant destination |
 |---|---|
-| `custom_zha_quirks/tuya_ts0601_zjhoqbrd.py` (pending) | `/config/custom_zha_quirks/tuya_ts0601_zjhoqbrd.py` |
-| `pyscript/zwt198_schedule.py` (pending) | `/config/pyscript/zwt198_schedule.py` |
+| `custom_zha_quirks/tuya_ts0601_zjhoqbrd.py` | `/config/custom_zha_quirks/tuya_ts0601_zjhoqbrd.py` |
+| `pyscript/zwt198_schedule.py` | `/config/pyscript/zwt198_schedule.py` |
 | `packages/ZWT198_helpers.yaml` | `/config/ZWT198_helpers.yaml` |
-| `lovelace/zwt198_editor.yaml` (pending) | Lovelace YAML editor |
+| `lovelace/zwt198_editor.yaml` | Lovelace YAML editor |
 
 Configure the ZHA quirk path in `configuration.yaml` (merge into existing `zha:` configuration, do not duplicate top-level keys):
 
@@ -52,4 +52,4 @@ The editor depends on Pyscript and the dashboard uses a custom **ApexCharts Card
 
 ### Portability still required
 
-The original local test referenced an installation-specific device IEEE address and helper IDs. Future releases must make the IEEE and entity IDs configurable. Never publish the local IEEE as a public default.
+The included Pyscript has `IEEE = "REPLACE_WITH_YOUR_DEVICE_IEEE"`; set this to your own device IEEE. The included Lovelace card has a deployment-specific climate entity ID to update. The original local test referenced installation-specific helper IDs. Future releases must make the IEEE and entity IDs configurable. Never publish the local IEEE as a public default.
