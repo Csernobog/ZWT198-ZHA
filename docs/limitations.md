@@ -1,6 +1,6 @@
 # Limitations and known caveats
 
-1. **Verified source not committed yet.** The tested custom quirk, Pyscript and final Lovelace YAML must be copied verbatim from the running Home Assistant installation.
+1. **Source included, installation-specific placeholders remain.** Configure your device IEEE in the Pyscript file and climate entity ID in the Lovelace YAML before use.
 2. **Only one device variant tested.** `_TZE284_zjhoqbrd` / `TS0601` should not be broadened to all TS0601 devices.
 3. **Write confirmation pending.** `expect_reply=False` returns after dispatch without ensuring that the thermostat accepted and stored DP109.
 4. **Optimistic chart update.** Immediately after save, the graph may display the requested state before a matching device report arrives.
