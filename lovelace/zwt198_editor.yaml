@@ -1,0 +1,153 @@
+type: custom:expander-card
+title: Expander Card
+cards:
+  - type: vertical-stack
+    cards:
+      - type: entities
+        title: ZWT198 – Heti időprogram
+        show_header_toggle: false
+        entities:
+          - entity: input_select.zwt198_programhely
+            name: Programhely
+          - entity: input_datetime.zwt198_idopont
+            name: Időpont
+          - entity: input_number.zwt198_homerseklet
+            name: Célhőmérséklet
+      - type: horizontal-stack
+        cards:
+          - type: button
+            name: Mentés
+            icon: mdi:content-save
+            tap_action:
+              action: perform-action
+              perform_action: pyscript.zwt198_schedule_save
+              confirmation:
+                text: Biztosan elküldöd a módosított időprogramot?
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Betöltés
+            icon: mdi:download
+            tap_action:
+              action: perform-action
+              perform_action: pyscript.zwt198_schedule_load
+  - type: vertical-stack
+    cards:
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_select.zwt198_programhely
+            state_not:
+              - Hétvége 1
+              - Hétvége 2
+        card:
+          type: custom:apexcharts-card
+          header:
+            show: true
+            title: ZWT198 – Hétköznapi program
+          graph_span: 24h
+          span:
+            start: day
+          yaxis:
+            - min: 0
+              max: 30
+              decimals: 0
+          apex_config:
+            chart:
+              height: 300
+            xaxis:
+              tickAmount: 12
+            yaxis:
+              tickAmount: 30
+          series:
+            - entity: pyscript.zwt198_schedule
+              name: Célhőmérséklet
+              type: line
+              curve: stepline
+              stroke_width: 2
+              data_generator: |
+                const periods = entity.attributes.weekday || [];
+                if (!periods.length) return [];
+
+                const entries = periods.map(p => {
+                  const [h, m] = p.time.split(':').map(Number);
+                  return [h * 60 + m, Number(p.temperature)];
+                });
+
+                const base = start.getTime();
+                const points = [[base, entries[entries.length - 1][1]]];
+
+                for (const [minute, temp] of entries) {
+                  points.push([base + minute * 60000, temp]);
+                }
+
+                points.push([
+                  base + 1440 * 60000,
+                  entries[entries.length - 1][1]
+                ]);
+
+                return points;
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: input_select.zwt198_programhely
+            state:
+              - Hétvége 1
+              - Hétvége 2
+        card:
+          type: custom:apexcharts-card
+          header:
+            show: true
+            title: ZWT198 – Hétvégi program
+          graph_span: 24h
+          span:
+            start: day
+          yaxis:
+            - min: 0
+              max: 30
+              decimals: 0
+          apex_config:
+            chart:
+              height: 300
+            xaxis:
+              tickAmount: 12
+            yaxis:
+              tickAmount: 30
+          series:
+            - entity: pyscript.zwt198_schedule
+              name: Célhőmérséklet
+              type: line
+              curve: stepline
+              stroke_width: 2
+              data_generator: |
+                const periods = entity.attributes.weekend || [];
+                if (!periods.length) return [];
+
+                const entries = periods.map(p => {
+                  const [h, m] = p.time.split(':').map(Number);
+                  return [h * 60 + m, Number(p.temperature)];
+                });
+
+                const base = start.getTime();
+                const points = [[base, entries[entries.length - 1][1]]];
+
+                for (const [minute, temp] of entries) {
+                  points.push([base + minute * 60000, temp]);
+                }
+
+                points.push([
+                  base + 1440 * 60000,
+                  entries[entries.length - 1][1]
+                ]);
+
+                return points;
+title-card:
+  type: thermostat
+  entity: climate.folyoso_tze284_zjhoqbrd_ts0601
+  features:
+    - type: climate-hvac-modes
+title-card-clickable: true
+title-card-button-overlay: true
+grid_options:
+  columns: 12
+  rows: auto
