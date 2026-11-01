@@ -1,0 +1,28 @@
+# Import via homeassistant.packages in configuration.yaml
+input_select:
+  zwt198_programhely:
+    name: ZWT198 programhely
+    options:
+      - "Hétköznap 1"
+      - "Hétköznap 2"
+      - "Hétköznap 3"
+      - "Hétköznap 4"
+      - "Hétköznap 5"
+      - "Hétköznap 6"
+      - "Hétvége 1"
+      - "Hétvége 2"
+
+input_datetime:
+  zwt198_idopont:
+    name: ZWT198 időpont
+    has_date: false
+    has_time: true
+
+input_number:
+  zwt198_homerseklet:
+    name: ZWT198 célhőmérséklet
+    min: 5
+    max: 35
+    step: 0.5
+    mode: box
+    unit_of_measurement: "°C"
