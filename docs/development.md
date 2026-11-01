@@ -21,7 +21,7 @@
 
 ## Next work
 
-1. Import exact source snapshots (quirk, Pyscript, working dashboard YAML) from the tested Home Assistant system.
+1. Imported exact source snapshots (quirk, Pyscript, working dashboard YAML) from the tested Home Assistant system. The Pyscript IEEE identifier was intentionally redacted for publication.
 2. Remove hard-coded per-installation identifiers.
 3. Add report-based write confirmation, timeout, and second-write lock.
 4. Add testing/documentation for additional firmware variants.
