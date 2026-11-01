@@ -1,0 +1,15 @@
+# Local development and HA runtime
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.log
+*.bak
+*.tmp
+.DS_Store
+.vscode/
+.idea/
+secrets.yaml
